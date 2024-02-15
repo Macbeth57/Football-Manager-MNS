@@ -1,0 +1,14 @@
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\bin\Debug\net8.0\MnsFC.exe
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\bin\Debug\net8.0\MnsFC.deps.json
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\bin\Debug\net8.0\MnsFC.runtimeconfig.json
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\bin\Debug\net8.0\MnsFC.dll
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\bin\Debug\net8.0\MnsFC.pdb
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.AssemblyInfoInputs.cache
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.AssemblyInfo.cs
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.csproj.CoreCompileInputs.cache
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.dll
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\refint\MnsFC.dll
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.pdb
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.genruntimeconfig.cache
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\ref\MnsFC.dll
