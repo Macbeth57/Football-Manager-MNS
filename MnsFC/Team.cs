@@ -24,20 +24,6 @@ namespace MnsFC
             {
                 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30
             };
-            foreach (Player player in StartingPlayers)
-            {
-                Random random = new Random();
-                int randomIndex = random.Next(0, AvailableNumbers.Count);
-                player.Number = AvailableNumbers[randomIndex];
-                AvailableNumbers.Remove(AvailableNumbers[randomIndex]);
-            }
-            foreach (Player player in SubstitutePlayers)
-            {
-                Random random = new Random();
-                int randomIndex = random.Next(0, AvailableNumbers.Count);
-                player.Number = AvailableNumbers[randomIndex];
-                AvailableNumbers.Remove(AvailableNumbers[randomIndex]);
-            }
         }
         public void AddPlayer(Player player)
         {
@@ -119,97 +105,26 @@ namespace MnsFC
                 MovePlayerFromStartingToSubstitute(StartingPlayers[i]);
             }
         }
-        public void DisplayTeam()
+        public void AssignNumbers()
         {
-            string userChoice = "";
-
-            while(userChoice != "0")
+            foreach (Player player in StartingPlayers)
             {
-                Console.Clear();
-                Console.WriteLine("## " + Name + " ##");
-                Console.WriteLine();
-                Console.WriteLine("## Starting Players ##");
-                Console.WriteLine();
-
-                foreach (Player player in StartingPlayers)
-                {
-                    if (player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.Write(" - REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else if (player.IsInjured && !Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-
-                    }
-                    else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
-
-                    }
-                }
-
-                Console.WriteLine();
-                Console.WriteLine("## Substitutes Players ##");
-                Console.WriteLine();
-
-                foreach (Player player in SubstitutePlayers)
-                {
-                    if(player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.Write(" - REDCARD");
-                        Console.ForegroundColor= ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else if(player.IsInjured && !Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-
-                    }
-                    else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
-
-                    }
-                }
-                Console.WriteLine();
-                Console.WriteLine("[RETOUR MENU]: 0");
-                Console.WriteLine();
-                userChoice = Console.ReadLine();
+                player.ActualTeam = this; //Truc de fou furieux
+                player.Teams.Add(this); //Truc de fou furieux
+                Random random = new Random();
+                int randomIndex = random.Next(0, AvailableNumbers.Count);
+                player.Number = AvailableNumbers[randomIndex];
+                AvailableNumbers.Remove(AvailableNumbers[randomIndex]);
             }
-            Menu.RunMainMenu(this);
+            foreach (Player player in SubstitutePlayers)
+            {
+                player.ActualTeam = this; //Truc de fou furieux
+                player.Teams.Add(this); //Truc de fou furieux
+                Random random = new Random();
+                int randomIndex = random.Next(0, AvailableNumbers.Count);
+                player.Number = AvailableNumbers[randomIndex];
+                AvailableNumbers.Remove(AvailableNumbers[randomIndex]);
+            }
         }
     }
 }

@@ -14,6 +14,8 @@ namespace MnsFC
         public bool IsInjured { get; set; }
         public bool IsLegit { get; set; }
         public List<Card> CurrentCards { get; set; }
+        public Team ActualTeam { get; set; }
+        public List<Team> Teams { get; set; }
 
         public Player(string lastname, string firstname) 
         {
@@ -21,6 +23,7 @@ namespace MnsFC
             Firstname = firstname;
             IsInjured = false;
             CurrentCards = new List<Card>();
+            Teams = new List<Team>();
         }
         public Player(string lastname, string firstname, int number)
         {
@@ -29,7 +32,15 @@ namespace MnsFC
             Number = number;
             IsInjured = false;
             CurrentCards = new List<Card>();
+            Teams = new List<Team>();
         }
-        
+        public Player(string lastname, string firstname, Team actualTeam)
+        {
+            Lastname = lastname;
+            Firstname = firstname;
+            IsInjured = false;
+            CurrentCards = new List<Card>();
+            ActualTeam = actualTeam;
+        }
     }
 }

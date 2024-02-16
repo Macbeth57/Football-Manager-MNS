@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.ForegroundColor = ConsoleColor.Green;    
+            Console.ForegroundColor = ConsoleColor.Green;
+            Game game = new Game();
+
             //Creation d'équipes
             Generator generator = new Generator();
             List<Player> startingPlayerList = new List<Player>();
@@ -20,11 +22,20 @@
                 substitutePlayerList.Add(generator.PlayerGenerator());
             }
             Team team = new Team("MNS FC", startingPlayerList,substitutePlayerList);
+            team.AssignNumbers();
+            game.Teams.Add(team);
 
             //Game
             Referee.GiveRedCard(team.StartingPlayers[0]);
             team.OrganizeTeam();
-            Menu.RunMainMenu(team);
+            Menu.RunMainMenu(team, game);
+
+            //Ajouter une nouvelle equipe
+            //Afficher les joueurs de toutes les equipes
+            //Tester un transfert
+            //Regler problème de l'attribution des numéros 
+            //Voir pour modifier constructeur de la classe Team
+            //Regler problème menu organisation d'équipe impossible de revenir menu principal
         }
     }
 }
