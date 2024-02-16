@@ -12,6 +12,7 @@ namespace MnsFC
         public string Firstname { get; set; }
         public int Number { get; set; }
         public bool IsInjured { get; set; }
+        public bool IsLegit { get; set; }
         public List<Card> CurrentCards { get; set; }
 
         public Player(string lastname, string firstname) 
@@ -29,5 +30,6 @@ namespace MnsFC
             IsInjured = false;
             CurrentCards = new List<Card>();
         }
+        
     }
 }

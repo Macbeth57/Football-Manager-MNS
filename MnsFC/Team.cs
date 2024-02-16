@@ -94,6 +94,31 @@ namespace MnsFC
             SubstitutePlayers.Remove(playerToMove);
             StartingPlayers.Add(playerToMove);
         }
+        public void OrganizeTeam()
+        {
+            for(int i = 0; i < StartingPlayers.Count; i++)
+            {
+                if (!Referee.IsThisPlayerLegit(StartingPlayers[i]))
+                {
+                    MovePlayerFromStartingToSubstitute(StartingPlayers[i]);
+                }
+            }
+            for(int i = 0; i < SubstitutePlayers.Count; i++)
+            {
+                if (Referee.IsThisPlayerLegit(SubstitutePlayers[i]))
+                {
+                    MovePlayerFromSubstituteToStarting(SubstitutePlayers[i]);
+                }
+            }
+            for(int i = 0; i < StartingPlayers.Count; i++)
+            {
+                if(StartingPlayers.Count <= 11)
+                {
+                    break;
+                }
+                MovePlayerFromStartingToSubstitute(StartingPlayers[i]);
+            }
+        }
         public void DisplayTeam()
         {
             string userChoice = "";
@@ -108,8 +133,37 @@ namespace MnsFC
 
                 foreach (Player player in StartingPlayers)
                 {
-                    if (Referee.IsThisPlayerLegit(player))
+                    if (player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                    {
+                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" INJURED");
+                        Console.Write(" - REDCARD");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine();
+                    }
+                    else if (player.IsInjured && !Referee.DoesHaveTooManyCards(player))
+                    {
+                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" INJURED");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine();
+
+                    }
+                    else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                    {
+                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" REDCARD");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine();
+                    }
+                    else
+                    {
                         Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+
+                    }
                 }
 
                 Console.WriteLine();
@@ -118,7 +172,37 @@ namespace MnsFC
 
                 foreach (Player player in SubstitutePlayers)
                 {
-                    Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    if(player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                    {
+                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" INJURED");
+                        Console.Write(" - REDCARD");
+                        Console.ForegroundColor= ConsoleColor.Green;
+                        Console.WriteLine();
+                    }
+                    else if(player.IsInjured && !Referee.DoesHaveTooManyCards(player))
+                    {
+                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" INJURED");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine();
+
+                    }
+                    else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                    {
+                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" REDCARD");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+
+                    }
                 }
                 Console.WriteLine();
                 Console.WriteLine("[RETOUR MENU]: 0");

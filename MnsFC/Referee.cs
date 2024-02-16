@@ -56,5 +56,16 @@ namespace MnsFC
             }
             return true;
         }
+        public static bool DoesHaveTooManyCards(Player player)
+        {
+            int valueCards = 0;
+
+            foreach (Card card in player.CurrentCards)
+            {
+                valueCards += card.value;
+            }
+
+            return valueCards >= 2 ? true : false;
+        }
     }
 }
