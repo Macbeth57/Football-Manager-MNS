@@ -50,7 +50,11 @@ namespace MnsFC
             {
                 totalValueCards += card.value;
             }
-            return totalValueCards >= 2 ? false : true;
+            if(totalValueCards >= 2 || player.IsInjured == true)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

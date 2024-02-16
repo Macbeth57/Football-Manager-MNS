@@ -4,10 +4,12 @@
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.Green;    
             //Creation d'équipes
             Generator generator = new Generator();
             List<Player> startingPlayerList = new List<Player>();
             List<Player> substitutePlayerList = new List<Player>();
+            string menuReturn = "";
 
             for (int i = 0; i <= 11; i++)
             {
@@ -20,10 +22,7 @@
             Team team = new Team("MNS FC", startingPlayerList,substitutePlayerList);
 
             //Game
-            
-            team.DisplayTeam();
-
-            Console.ReadLine();
+            Menu.RunMainMenu(team);
         }
     }
 }

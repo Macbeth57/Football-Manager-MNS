@@ -96,28 +96,36 @@ namespace MnsFC
         }
         public void DisplayTeam()
         {
-            Console.WriteLine("## " + Name + " ##");
-            Console.WriteLine();
-            Console.WriteLine("## Starting Players ##");
-            Console.WriteLine();
+            string userChoice = "";
 
-            foreach (Player player in StartingPlayers)
+            while(userChoice != "0")
             {
-                if(Referee.IsThisPlayerLegit(player))
-                Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+                Console.Clear();
+                Console.WriteLine("## " + Name + " ##");
+                Console.WriteLine();
+                Console.WriteLine("## Starting Players ##");
+                Console.WriteLine();
+
+                foreach (Player player in StartingPlayers)
+                {
+                    if (Referee.IsThisPlayerLegit(player))
+                        Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("## Substitutes Players ##");
+                Console.WriteLine();
+
+                foreach (Player player in SubstitutePlayers)
+                {
+                    Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+                }
+                Console.WriteLine();
+                Console.WriteLine("[RETOUR MENU]: 0");
+                Console.WriteLine();
+                userChoice = Console.ReadLine();
             }
-
-            Console.WriteLine();
-            Console.WriteLine("## Substitutes Players ##");
-            Console.WriteLine();
-
-            foreach (Player player in SubstitutePlayers)
-            {
-                Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
-            }
-
-            Console.WriteLine();
+            Menu.RunMainMenu(this);
         }
-        
     }
 }

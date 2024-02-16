@@ -12,3 +12,4 @@ C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\refint\MnsFC.dll
 C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.pdb
 C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.genruntimeconfig.cache
 C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\ref\MnsFC.dll
+C:\Users\krust\OneDrive\Bureau\C#\MnsFC\MnsFC\obj\Debug\net8.0\MnsFC.sourcelink.json
