@@ -60,18 +60,20 @@ namespace MnsFC
             Console.Clear();
             Console.WriteLine("Entrez le nom du joueur à transférer :");
             string lastnameFromPlayerToTransfer = Console.ReadLine();
+
             Console.Clear();
             Console.WriteLine("Entrez le prénom du joueur à transférer :");
             string firstnameFromPlayerToTransfer = Console.ReadLine();
             Team teamPlayerIn = game.WhichTeamIsThisPlayerIn(lastnameFromPlayerToTransfer,firstnameFromPlayerToTransfer);
+
             Console.Clear();
             Console.WriteLine("Ce joueur se trouve actuellement dans l'équipe : " + teamPlayerIn.Name );
             Console.WriteLine("Dans quelle équipe souhaitez vous le transferer ? [nom]");
             string teamNameToTransferThePlayerIn = Console.ReadLine();
+
             Team teamPlayerIsGoing = game.SearchATeamByName(teamNameToTransferThePlayerIn);
             Player player = teamPlayerIn.SearchForPlayer(lastnameFromPlayerToTransfer, firstnameFromPlayerToTransfer);
-            teamPlayerIn.RemovePlayer(player);
-            teamPlayerIsGoing.AddPlayer(player);
+            game.PlayerTransfer(player, teamPlayerIn, teamPlayerIsGoing);
 
             RunMainMenu(team, game);
         }
@@ -95,7 +97,7 @@ namespace MnsFC
                     MovePlayerFromSubstituteToStartingMenu(team, game);
                     break;
                 case "3":
-                    Menu.RunMainMenu(team, game);
+                    RunMainMenu(team, game);
                     break;
                 default:
                     break;
@@ -112,7 +114,7 @@ namespace MnsFC
             string userChoiceFirstname = Console.ReadLine();
 
             team.MovePlayerFromSubstituteToStarting(team.SearchForPlayer(userChoiceLastname,userChoiceFirstname));
-            Menu.RunMainMenu(team, game);
+            RunMainMenu(team, game);
         }
         public static void MovePlayerFromStartingToSubstituteMenu(Team team, Game game)
         {
@@ -124,7 +126,7 @@ namespace MnsFC
             string userChoiceFirstname = Console.ReadLine();
 
             team.MovePlayerFromStartingToSubstitute(team.SearchForPlayer(userChoiceLastname, userChoiceFirstname));
-            Menu.RunMainMenu(team, game);
+            RunMainMenu(team, game);
         }
         public static void DisplayTeamMenu(Team team, Game game)
         {
@@ -135,7 +137,7 @@ namespace MnsFC
                 DisplayTeam(team);
                 userChoice = Console.ReadLine();
             }
-            Menu.RunMainMenu(team, game);
+            RunMainMenu(team, game);
         }
         public static void DisplayTeam(Team team)
         {
@@ -237,13 +239,9 @@ namespace MnsFC
             while (userChoice != "0")
             {
                 DisplayAllTeams(game);
-                foreach(Team teamInList in game.Teams)
-                {
-                    Console.WriteLine(teamInList.Name);
-                }
                 userChoice = Console.ReadLine();
             }
-            Menu.RunMainMenu(team, game);
+            RunMainMenu(team, game);
         }
     }
 }

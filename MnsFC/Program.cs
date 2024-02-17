@@ -22,8 +22,8 @@
             //Game
             Menu.RunMainMenu(team1, game);
 
-            //Tester un transfert
-            //Regler problème de l'attribution des numéros lors d'un transfert
+            //Regler bug de l'affichage des équipes après un transfert
+            //Regler problème de l'attribution des numéros lors d'un transfert ??? 
         }
     }
 }
