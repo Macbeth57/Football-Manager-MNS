@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -228,6 +229,38 @@ namespace MnsFC
             Player player = new Player(randomFirstname, randomLastname);
 
             return player;
+        }
+        public List<Player> StartingPlayersListGenerator()
+        {
+            List<Player> startingPlayerList = new List<Player>();
+            for (int i = 0; i < 11; i++)
+            {
+                startingPlayerList.Add(PlayerGenerator());
+            }
+            return startingPlayerList;
+        }
+        public List<Player> SubstitutePlayersListGenerator()
+        {
+            List<Player> substitutePlayerList = new List<Player>();
+            for (int i = 0; i < 6; i++)
+            {
+                substitutePlayerList.Add(PlayerGenerator());
+            }
+            return substitutePlayerList;
+        }
+        public Team TeamGenerator(string teamName, Game game)
+        {
+            List<Player> startingPlayers = StartingPlayersListGenerator();
+            List<Player> substitutePlayers = SubstitutePlayersListGenerator();
+            Team team = new Team(teamName,startingPlayers,substitutePlayers);
+
+            team.StartingPlayers = startingPlayers;
+            team.SubstitutePlayers = substitutePlayers;
+            team.AssignNumbers();
+
+            game.Teams.Add(team);
+
+            return team;
         }
     }
 }
