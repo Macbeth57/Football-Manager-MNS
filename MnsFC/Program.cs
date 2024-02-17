@@ -15,13 +15,13 @@
             team1 = generator.TeamGenerator("CDA-Csharp",game);
             team2 = generator.TeamGenerator("CDA-Java", game);
 
-            //Game
+            //Test
             Referee.GiveRedCard(team1.StartingPlayers[0]);
-            team1.OrganizeTeam();
+            team1.OrganizeTeam(); 
+
+            //Game
             Menu.RunMainMenu(team1, game);
 
-            //Ajouter une nouvelle equipe
-            //Afficher les joueurs de toutes les equipes
             //Tester un transfert
             //Regler problème de l'attribution des numéros lors d'un transfert
         }

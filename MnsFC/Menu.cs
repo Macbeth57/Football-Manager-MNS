@@ -18,21 +18,25 @@ namespace MnsFC
                 && userChoice != "1"
                 && userChoice != "2"
                 && userChoice != "3"
-                && userChoice != "4")
+                && userChoice != "4"
+                && userChoice != "5")
             {
                 Console.WriteLine("[0] - Consultez votre équipe");
                 Console.WriteLine("[1] - Effectuer des changements");
                 Console.WriteLine("[2] - Lancer un match");
                 Console.WriteLine("[3] - Effectuer un transfert");
-                Console.WriteLine("[4] - Quitter");
+                Console.WriteLine("[4] - Afficher toutes les équipes");
+                Console.WriteLine("[5] - Quitter");
 
                 userChoice = Console.ReadLine();
+                Console.Clear();
             }
 
             switch(userChoice)
             {
                 case "0":
-                    DisplayTeam(team, game);
+
+                    DisplayTeamMenu(team, game);
                     break;
                 case "1":
                     OrganisationMenu(team, game);
@@ -42,6 +46,9 @@ namespace MnsFC
                     break;
                 case "3":
                     TransfertMenu(game, team);
+                    break;
+                case "4":
+                    DisplayAllTeamsMenu(team,game);
                     break;
                 default:
                     break;
@@ -119,94 +126,121 @@ namespace MnsFC
             team.MovePlayerFromStartingToSubstitute(team.SearchForPlayer(userChoiceLastname, userChoiceFirstname));
             Menu.RunMainMenu(team, game);
         }
-        public static void DisplayTeam(Team team, Game game)
+        public static void DisplayTeamMenu(Team team, Game game)
         {
             string userChoice = "";
 
             while (userChoice != "0")
             {
-                Console.Clear();
-                Console.WriteLine("## " + team.Name + " ##");
-                Console.WriteLine();
-                Console.WriteLine("## Starting Players ##");
-                Console.WriteLine();
+                DisplayTeam(team);
+                userChoice = Console.ReadLine();
+            }
+            Menu.RunMainMenu(team, game);
+        }
+        public static void DisplayTeam(Team team)
+        {
+            Console.WriteLine("## " + team.Name + " ##");
+            Console.WriteLine();
+            Console.WriteLine("## Starting Players ##");
+            Console.WriteLine();
 
-                foreach (Player player in team.StartingPlayers)
+            foreach (Player player in team.StartingPlayers)
+            {
+                if (player.IsInjured && Referee.DoesHaveTooManyCards(player))
                 {
-                    if (player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.Write(" - REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else if (player.IsInjured && !Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-
-                    }
-                    else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
-
-                    }
+                    Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" INJURED");
+                    Console.Write(" - REDCARD");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
                 }
-
-                Console.WriteLine();
-                Console.WriteLine("## Substitutes Players ##");
-                Console.WriteLine();
-
-                foreach (Player player in team.SubstitutePlayers)
+                else if (player.IsInjured && !Referee.DoesHaveTooManyCards(player))
                 {
-                    if (player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.Write(" - REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else if (player.IsInjured && !Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" INJURED");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
+                    Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" INJURED");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
 
-                    }
-                    else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
-                    {
-                        Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.Write(" REDCARD");
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine();
-                    }
-                    else
-                    {
-                        Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
-
-                    }
                 }
+                else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                {
+                    Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" REDCARD");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("## Substitutes Players ##");
+            Console.WriteLine();
+
+            foreach (Player player in team.SubstitutePlayers)
+            {
+                if (player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                {
+                    Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" INJURED");
+                    Console.Write(" - REDCARD");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
+                }
+                else if (player.IsInjured && !Referee.DoesHaveTooManyCards(player))
+                {
+                    Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" INJURED");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
+
+                }
+                else if (!player.IsInjured && Referee.DoesHaveTooManyCards(player))
+                {
+                    Console.Write(player.Firstname + " " + player.Lastname + " " + player.Number);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write(" REDCARD");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
+                }
+                else
+                {
+                    Console.WriteLine(player.Firstname + " " + player.Lastname + " " + player.Number);
+
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("[RETOUR MENU]: 0");
+            Console.WriteLine();
+        }
+        public static void DisplayAllTeams(Game game)
+        {
+            foreach(Team team in game.Teams)
+            {
+                DisplayTeam(team);
+                Console.WriteLine("----------------------------------------------");
                 Console.WriteLine();
-                Console.WriteLine("[RETOUR MENU]: 0");
-                Console.WriteLine();
+            }
+        }
+        public static void DisplayAllTeamsMenu(Team team, Game game)
+        {
+            string userChoice = "";
+
+            while (userChoice != "0")
+            {
+                DisplayAllTeams(game);
+                foreach(Team teamInList in game.Teams)
+                {
+                    Console.WriteLine(teamInList.Name);
+                }
                 userChoice = Console.ReadLine();
             }
             Menu.RunMainMenu(team, game);

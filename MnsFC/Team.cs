@@ -44,19 +44,15 @@ namespace MnsFC
         public void RemovePlayer(Player player)
         {
             AvailableNumbers.Add(player.Number);
-            foreach (Player playerInList in SubstitutePlayers)
+
+            if(SubstitutePlayers.Contains(player))
             {
-                if(playerInList == player)
-                {
-                    SubstitutePlayers.Remove(player);
-                }
+                SubstitutePlayers.Remove(player);
             }
-            foreach(Player playerInList in StartingPlayers)
+            if (StartingPlayers.Contains(player))
             {
-                if (playerInList == player)
-                {
-                    StartingPlayers.Remove(player);
-                }
+                StartingPlayers.Remove(player);
+
             }
         }
         public Player SearchForPlayer(string lastname,string firstname)

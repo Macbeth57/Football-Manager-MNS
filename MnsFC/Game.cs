@@ -16,21 +16,18 @@ namespace MnsFC
         }
         public void PlayerTransfer(Player player, Team teamPlayerLeaving, Team teamPlayerJoining)
         {
-            for (int i = 0; i < teamPlayerLeaving.StartingPlayers.Count; i++)
+            if (teamPlayerLeaving.StartingPlayers.Contains(player))
             {
-                if (teamPlayerLeaving.StartingPlayers.Contains(player))
-                {
-                    teamPlayerLeaving.StartingPlayers.Remove(player);
-                }
-                if (teamPlayerLeaving.SubstitutePlayers.Contains(player))
-                {
-                    teamPlayerLeaving.SubstitutePlayers.Remove(player);
-                }
-
-                teamPlayerJoining.SubstitutePlayers.Add(player);
-                player.ActualTeam = teamPlayerJoining;
-                player.Teams.Add(teamPlayerJoining);
+                teamPlayerLeaving.StartingPlayers.Remove(player);
             }
+            if (teamPlayerLeaving.SubstitutePlayers.Contains(player))
+            {
+                teamPlayerLeaving.SubstitutePlayers.Remove(player);
+            }
+
+            teamPlayerJoining.SubstitutePlayers.Add(player);
+            player.ActualTeam = teamPlayerJoining;
+            player.Teams.Add(teamPlayerJoining);
         }
         public Team WhichTeamIsThisPlayerIn(string lastname, string firstname)
         {
